@@ -75,7 +75,7 @@ with st.expander("🧠 ¿Cómo usar esta app? Haz clic aquí"):
 #---
 #""")
 #Datos informativos, []
-with st.expander("Datos informativos"):
+with st.expander("Derechos y agradecimientos"):
     st.markdown("""-Software desarrollado para la Universidad Francisco de Paula Santander  
 Curso Integrador II - Ingeniería Electrónica  
 Autores: Jaime Arce, Johan Salazar, Angel Hernández, Frank Portillo  
