@@ -45,21 +45,28 @@ st.markdown(
 # --------------------------------------------
 with st.expander("🧠 ¿Cómo usar esta app? Haz clic aquí"):
     st.markdown("""
-    **Guía de uso:**
-    
-    1. **Selecciona datos**: Elige una ubicación predeterminada o sube tu propio archivo CSV.
-    2. **Configura el modelo**: Ajusta el parámetro de lookback (número de pasos hacia atrás).
-    3. **Analiza resultados**: Revisa las predicciones por intervalos, métricas y recomendaciones.
-    
-    **Requisitos del archivo CSV:**
-    - Debe contener la columna `ALLSKY_SFC_SW_DWN` con los valores de radiación solar.
-    - Opcionalmente puede incluir una columna de fechas.
-    
-    **Novedades en esta versión:**
-    - Predicciones para 1h, 3h, 6h y 12h
-    - Interpretación de condiciones solares
-    - Recomendaciones prácticas para sistemas fotovoltaicos
-    """)
+    <style>
+        .expander-content {
+            color: #002c36; /* Cambia este color por el que prefieras */
+        }
+    </style>
+    <div class='expander-content'>
+        **Guía de uso:**
+        
+        1. **Selecciona datos**: Elige una ubicación predeterminada o sube tu propio archivo CSV.
+        2. **Configura el modelo**: Ajusta el parámetro de lookback (número de pasos hacia atrás).
+        3. **Analiza resultados**: Revisa las predicciones por intervalos, métricas y recomendaciones.
+
+        **Requisitos del archivo CSV:**
+        - Debe contener la columna `ALLSKY_SFC_SW_DWN` con los valores de radiación solar.
+        - Opcionalmente puede incluir una columna de fechas.
+
+        **Novedades en esta versión:**
+        - Predicciones para 1h, 3h, 6h y 12h
+        - Interpretación de condiciones solares
+        - Recomendaciones prácticas para sistemas fotovoltaicos
+    </div>
+    """, unsafe_allow_html=True)
 
 # --------------------------------------------
 # Sección de Créditos Académicos
