@@ -19,7 +19,7 @@ from datetime import datetime
 st.markdown(
     """
     <style>
-        body {
+        [data-testid="stAppViewContainer"] {
             background-image: url("https://imgcdn.stablediffusionweb.com/2024/5/25/0b3bf6d9-b5dd-4676-8764-48afc7288c63.jpg");
             background-size: cover;
             background-position: center;
@@ -28,6 +28,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 # Configuración inicial de la página de Streamlit
