@@ -16,7 +16,7 @@ from io import StringIO
 from datetime import datetime
 
 # Configuración inicial de la página de Streamlit
-streamlit.markdown(
+st.markdown(
     "<h1 style='text-align: center; color: orange;'>☀️ Predicción de Radiación Solar</h1>",
     unsafe_allow_html=True
 )
