@@ -1,0 +1,14 @@
+# Core
+streamlit
+tensorflow
+pandas
+
+# Ciencia de datos
+numpy
+scikit-learn
+matplotlib
+
+# Nuevas dependencias
+requests
+openpyxl
+plotly
