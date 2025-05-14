@@ -19,7 +19,11 @@ from datetime import datetime
 st.set_page_config(page_title='Predicción Radiación Solar', layout='wide', page_icon="☀️")
 
 # Título principal
-st.title('☀️ Predicción de Radiación Solar - ALLSKY_SFC_SW_DWN')
+streamlit.markdown(
+    "<h1 style='text-align: center; color: orange;'>☀️ Predicción de Radiación Solar</h1>",
+    unsafe_allow_html=True
+)
+
 
 # --------------------------------------------
 # Sección de Ayuda y Descripción
