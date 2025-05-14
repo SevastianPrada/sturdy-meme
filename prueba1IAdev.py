@@ -47,7 +47,7 @@ with st.expander("🧠 ¿Cómo usar esta app? Haz clic aquí"):
     st.markdown("""
     <style>
         div.stExpander div div {
-            color: red !important; /* Cambia el color aquí */
+            color: #002c36 !important; /* Cambia el color aquí */
             font-weight: bold; /* Opcional: hacer el texto más visible */
         }
     </style>
