@@ -15,7 +15,23 @@ import requests
 from io import StringIO
 from datetime import datetime
 
+#imagen de fondo
+st.markdown(
+    """
+    <style>
+        body {
+            background-image: url("https://imgcdn.stablediffusionweb.com/2024/5/25/0b3bf6d9-b5dd-4676-8764-48afc7288c63.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # Configuración inicial de la página de Streamlit
+#Titulos Centrado
 st.markdown(
     "<h1 style='text-align: center; color: orange;'>☀️&nbsp;Predicción de Radiación Solar&nbsp;☀️</h1>",
     unsafe_allow_html=True
