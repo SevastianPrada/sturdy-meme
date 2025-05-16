@@ -99,6 +99,7 @@ Versión: 2.1.0 | Última actualización: """ + datetime.now().strftime("%Y-%m-%
 # --------------------------------------------
 # Funciones Auxiliares
 # --------------------------------------------
+
 @st.cache_data
 def load_data(url):
     """Carga datos desde una URL con caché para mejor rendimiento"""
@@ -117,25 +118,6 @@ def create_sequences(data, steps):
         y.append(data[i])
     return np.array(X), np.array(y)
 
-#def plot_results(real, pred, ma, lr, steps):
-#    """Genera el gráfico comparativo con estilo mejorado"""
-#    fig, ax = plt.subplots(figsize=(12, 6))
- #   
-  #  # Personalización de colores y estilos
- #   ax.plot(real, label='Valor Real', color='#1f77b4', linewidth=2, alpha=0.9)
-  #  ax.plot(pred, label='Predicción LSTM', color='white', linestyle='--', linewidth=2)
-   # ax.plot(ma, label=f'Promedio Móvil ({steps} pasos)', color='#2ca02c', alpha=0.7)
-    #ax.plot(lr, label='Tendencia Lineal', color='#d62728', alpha=0.7)
-    
-    # Configuración del gráfico
-   # ax.set_title("Comparación: Valores Reales vs Predicciones", fontsize=14, pad=20)
-    #ax.set_xlabel("Índice de Tiempo", fontsize=12)
-    #ax.set_ylabel("Radiación Solar (W/m²)", fontsize=12)
-    #ax.legend(fontsize=10, framealpha=0.9)
-    #ax.grid(True, linestyle='--', alpha=0.3)
-    #plt.tight_layout()
-    
-    #return fig
 
 def interpret_radiation(value):
     """Traduce el valor de radiación a condiciones solares con color azul turquesa"""
@@ -149,7 +131,7 @@ def interpret_radiation(value):
     elif 300 <= value < 600:
         return "<span style='color:#5D9FE9;'>Mayormente soleado - Buena producción</span>"
     else:
-        return "<span style='color:#5D9FE9;'>Soleado - Excelente producción solar</span>"
+        return "Soleado - Excelente producción solar</span>"
 
 def get_recommendation(avg_radiation):
     """Genera recomendaciones basadas en la radiación promedio"""
