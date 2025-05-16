@@ -445,24 +445,24 @@ with tab2:
         fig = plot_radiation_area(y_pred_inv, time_steps=n_steps)
         st.pyplot(fig)
                 
-if recommendation and isinstance(recommendation, dict) and "color" in recommendation:
-    if recommendation["color"] == "red":
-        st.error(f"""
-        **{recommendation['message']}**  
-        {interpret_radiation(avg_next_6h)}
-        """)
-    elif recommendation["color"] == "orange":
-        st.warning(f"""
-        **{recommendation['message']}**  
-        {interpret_radiation(avg_next_6h)}
-        """)
-    else:
-        st.success(f"""
-        **{recommendation['message']}**  
-        {interpret_radiation(avg_next_6h)}
-        """)
-else:
-    st.error("❌ Error: No se pudo generar una recomendación válida.")
+        if recommendation and isinstance(recommendation, dict) and "color" in recommendation:
+            if recommendation["color"] == "red":
+                st.error(f"""
+                **{recommendation['message']}**  
+                {interpret_radiation(avg_next_6h)}
+                """)
+            elif recommendation["color"] == "orange":
+                st.warning(f"""
+                **{recommendation['message']}**  
+                {interpret_radiation(avg_next_6h)}
+                """)
+            else:
+                st.success(f"""
+                **{recommendation['message']}**  
+                {interpret_radiation(avg_next_6h)}
+                """)
+        else:
+            st.error("❌ Error: No se pudo generar una recomendación válida.")
 
         # Mostrar recomendaciones en lista
         st.markdown("**Acciones recomendadas:**")
