@@ -512,15 +512,10 @@ with tab2:
             """.format(n_steps))
 with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
-        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial.")
+        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
 
-        # Crear el elemento de carga de archivos
-        uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
-import streamlit as st
-import pandas as pd
-
-# Crear el cargador de archivos
-uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"], key="file_upload_1")
+# Interfaz de carga de archivo CSV en Streamlit
+uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
 
 if uploaded_file is not None:
     # Leer el archivo subido por el usuario
@@ -531,49 +526,57 @@ if uploaded_file is not None:
     st.write(df.head())
 
     # Verificar las columnas del DataFrame
-    st.write("Columnas Antes:", df.columns)
+    st.write("Columnas antes:", df.columns)
 
     # Si todas las columnas están en una sola cadena, dividirlas en columnas separadas
-    if len(df.columns) == 1 and df.columns[0] == 'YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_SFC_SW_DNI,T2M,RH2M,PS,WS10M':
+    if len(df.columns) == 1 and 'YEAR,MO,DY,HR' in df.columns[0]:
         df = df.iloc[:, 0].str.split(',', expand=True)
         df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
                       'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
 
-    # Convertir las columnas YEAR, MO, DY, HR en una sola columna
-    df[['YEAR', 'MO', 'DY', 'HR']] = df[['YEAR', 'MO', 'DY', 'HR']].astype(str)
-    df['datetime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
-    df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
+    # Convertir columnas a tipo string
+    required_columns = ['YEAR', 'MO', 'DY', 'HR']
+    if all(col in df.columns for col in required_columns):
+        df[required_columns] = df[required_columns].astype(str)
 
-    # Definir nuevo orden de columnas
-    nuevo_orden = ['datetime', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
-    df = df[nuevo_orden]
+        # Crear columna datetime combinando YEAR, MO, DY, HR
+        df['datetime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
+        df.drop(columns=['YEAR', 'MO', 'DY', 'HR'], inplace=True)
 
-    # Ordenar el dataset de forma ascendente
-    df.sort_values(by="datetime", inplace=True)
+        # Definir nuevo orden de columnas
+        nuevo_orden = ['datetime', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
+        df = df[nuevo_orden]
 
-    # Guardar el archivo modificado
-    df.to_csv('BaseDatos_2.csv', index=False)
-    st.write("✅ ¡Archivo BaseDatos_2.csv guardado con éxito!")
+        # Ordenar el dataset de forma ascendente
+        df.sort_values(by="datetime", inplace=True)
 
-    # Verificar valores nulos
-    st.write("🔎 Valores nulos en el DataFrame:", df.isnull().sum())
+        # Guardar el archivo modificado
+        df.to_csv('BaseDatos_2.csv', index=False)
+        st.write("✅ ¡Archivo BaseDatos_2.csv guardado con éxito!")
 
-    # Filtrar el DataFrame y guardar el archivo final
-    df_filtrado = df.iloc[:15]
-    df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
-    st.write("✅ ¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
+        # Mostrar información de valores nulos
+        st.write("🔎 Valores nulos en el DataFrame:", df.isnull().sum())
 
-    # Permitir la descarga del archivo procesado
-    file_path = "BaseDatos_filtrado.csv"
-    
-    try:
-        with open(file_path, "rb") as file:
+        # Calcular matriz de correlación
+        corr_matrix = df.corr(numeric_only=True)
+        if not corr_matrix.empty:
+            plt.figure(figsize=(10, 6))
+            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+            plt.title("Matriz de Correlación de BaseDatos_2.csv")
+            st.pyplot(plt)
+
+        # Filtrar datos y guardar archivo final
+        #df_filtrado = df.iloc[:5088]
+        #df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
+        st.write("✅ ¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
+
+        # Botón de descarga del archivo procesado
+        with open("BaseDatos_filtrado.csv", "rb") as file:
             st.download_button(
                 label="⬇️ Descargar archivo procesado",
                 data=file,
                 file_name="BaseDatos_filtrado.csv",
                 mime="text/csv"
             )
-    except FileNotFoundError:
-        st.error("❌ Error: No se encontró el archivo `BaseDatos_filtrado.csv`. Verifica que se haya generado correctamente.")
-
+    else:
+        st.error("❌ Error: No se encontraron las columnas requeridas. Verifica el formato del archivo CSV.")
