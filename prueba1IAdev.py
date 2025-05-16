@@ -568,7 +568,7 @@ with tab3:
             st.write("Número total de filas:", len(df))
         
             # Contar la cantidad de ceros y NaN en cada columna
-            st.write(df.isnull().sum())
+            #st.write(df.isnull().sum())
         
             # Cargar base de datos procesada
             df = pd.read_csv('BaseDatos_2.csv')
@@ -596,4 +596,4 @@ with tab3:
                 )
         
             # Mostrar el DataFrame final
-            st.write(df_filtrado)
+            #st.write(df_filtrado)
