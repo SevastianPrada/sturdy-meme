@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://th.bing.com/th/id/OIP.dJon0XK--BvOwnn8nZ-4dgHaE8?cb=iwc2&rs=1&pid=ImgDetMain");
+            background-image: url("https://c.pxhere.com/photos/f2/f9/photo-61765.jpg!d");
             background-size: cover;
             background-position: center;
         }
