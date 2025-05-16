@@ -581,29 +581,22 @@ with tab3:
         # Si todas las columnas están en una sola cadena, dividirlas en columnas separadas
         if len(df.columns) == 1 and df.columns[0] == 'YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_SFC_SW_DNI,RH2M,PS,WS10M,T2M':
             df = df.iloc[:, 0].str.split(',', expand=True)
-            df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
-                          'ALLSKY_SFC_SW_DNI', 'RH2M', 'PS', 'WS10M', 'T2M']
+            df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'RH2M', 'PS', 'WS10M', 'T2M']
 
         # Verificar las columnas después de la división
         st.write("Columnas después:", df.columns)
 
-        # Validación de existencia de columnas antes de la conversión
-        for col in ['YEAR', 'MO', 'DY', 'HR']:
-            if col in df.columns:
-                df[col] = df[col].astype(str)
-            else:
-                st.write(f"Error: La columna '{col}' no existe en el DataFrame.")
+        # Convertir las columnas YEAR, MO, DY, HR en una sola columna
+        df['YEAR'] = df['YEAR'].astype(str)
+        df['MO'] = df['MO'].astype(str)
+        df['DY'] = df['DY'].astype(str)
+        df['HR'] = df['HR'].astype(str)
 
-        # Crear la columna 'datetime' solo si todas las columnas necesarias existen
-        if all(col in df.columns for col in ['YEAR', 'MO', 'DY', 'HR']):
-            df['datatime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
-            # Eliminar las columnas utilizadas para el 'datetime'
-            df.drop(columns=['YEAR', 'MO', 'DY', 'HR'], inplace=True)
-        else:
-            st.write("Error: No se puede crear 'datatime' debido a la falta de una o más columnas.")
+        # Crear la columna 'datetime' combinando YEAR, MO, DY, HR
+        df['datatime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
 
-        # Mostrar columnas después de los cambios
-        st.write("Columnas después de la conversión:", df.columns)
+        # Eliminar las columnas utilizadas para el 'datetime'
+        df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
 
         # Guardar archivo modificado asegurando separación por comas
         df.to_csv('BaseDatos_1.csv', index=False, sep=",")
