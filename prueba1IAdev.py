@@ -143,13 +143,13 @@ def interpret_radiation(value):
         value = value[0] if len(value) > 0 else 0
     
     if value < 100:
-        return "<span style='color:#40E0D0;'>Nublado - Baja producción solar</span>"
+        return "<span style='color:#5D9FE9;'>Nublado - Baja producción solar</span>"
     elif 100 <= value < 300:
-        return "<span style='color:#40E0D0;'>Parcialmente nublado - Producción moderada</span>"
+        return "<span style='color:#5D9FE9;'>Parcialmente nublado - Producción moderada</span>"
     elif 300 <= value < 600:
-        return "<span style='color:#40E0D0;'>Mayormente soleado - Buena producción</span>"
+        return "<span style='color:#5D9FE9;'>Mayormente soleado - Buena producción</span>"
     else:
-        return "<span style='color:#40E0D0;'>Soleado - Excelente producción solar</span>"
+        return "<span style='color:#5D9FE9;'>Soleado - Excelente producción solar</span>"
 
 def get_recommendation(avg_radiation):
     """Genera recomendaciones basadas en la radiación promedio"""
