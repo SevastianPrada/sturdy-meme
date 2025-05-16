@@ -144,7 +144,8 @@ def get_recommendation(avg_radiation):
                 "Limitar cargas no esenciales",
                 "Verificar estado del sistema"
             ]
-        }
+        }  # Se agregó el cierre correcto aquí
+
     elif 100 <= avg_radiation < 300:
         return {
             "color": "orange",
