@@ -520,7 +520,7 @@ import streamlit as st
 import pandas as pd
 
 # Crear el cargador de archivos
-uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
+uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"], key="file_upload_1")
 
 if uploaded_file is not None:
     # Leer el archivo subido por el usuario
