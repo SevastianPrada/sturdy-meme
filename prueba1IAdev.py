@@ -338,7 +338,7 @@ with tab1:
 
 
         # Procesamiento y predicción
-        if st.button("Ejecutar Predicción", type="primary"):
+    if st.button("Ejecutar Predicción", type="primary"):
             if 'ALLSKY_SFC_SW_DWN' not in df.columns:
                 st.error("Los datos no contienen la columna requerida")
             else:
