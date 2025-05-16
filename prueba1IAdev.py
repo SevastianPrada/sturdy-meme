@@ -574,9 +574,9 @@ with tab3:
 
         if file_path:
             with open(file_path, "rb") as file:
-            st.download_button(
-            label="⬇️ Descargar archivo procesado",
-            data=file,
-            file_name="BaseDatos_filtrado.csv",
-            mime="text/csv"
-            )
+                st.download_button(
+                label="⬇️ Descargar archivo procesado",
+                data=file,
+                file_name="BaseDatos_filtrado.csv",
+                mime="text/csv"
+                )
