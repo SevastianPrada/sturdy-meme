@@ -445,24 +445,38 @@ with tab2:
         fig = plot_radiation_area(y_pred_inv, time_steps=n_steps)
         st.pyplot(fig)
                 
-        if recommendation and isinstance(recommendation, dict) and "color" in recommendation:
-            if recommendation["color"] == "red":
-                st.error(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
-            elif recommendation["color"] == "orange":
-                st.warning(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
+        def get_recommendation(avg_radiation):
+            """Genera recomendaciones basadas en la radiación promedio"""
+            if avg_radiation < 100:
+                return {
+                    "color": "red",
+                    "message": "Baja producción solar esperada",
+                    "recommendations": [
+                        "Considerar usar energía almacenada en baterías",
+                        "Limitar cargas no esenciales",
+                        "Verificar estado del sistema"
+                    ]
+                }
+            elif 100 <= avg_radiation < 300:
+                return {
+                    "color": "orange",
+                    "message": "Producción solar moderada",
+                    "recommendations": [
+                        "Monitorear el consumo energético",
+                        "Optimizar el uso de baterías",
+                        "Evaluar eficiencia del sistema"
+                    ]
+                }
             else:
-                st.success(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
-        else:
-            st.error("❌ Error: No se pudo generar una recomendación válida.")
+                return {
+                    "color": "green",
+                    "message": "Producción solar óptima",
+                    "recommendations": [
+                        "Aprovechar almacenamiento de energía",
+                        "Considerar expansión de capacidad",
+                        "Realizar mantenimiento preventivo"
+                    ]
+                }
 
         # Mostrar recomendaciones en lista
         st.markdown("**Acciones recomendadas:**")
