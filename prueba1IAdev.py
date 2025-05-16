@@ -115,25 +115,28 @@ def create_sequences(data, steps):
         y.append(data[i])
     return np.array(X), np.array(y)
 
-def plot_results(real, pred, ma, lr, steps):
-    """Genera el gráfico comparativo con estilo mejorado"""
-    fig, ax = plt.subplots(figsize=(12, 6))
-    
-    # Personalización de colores y estilos
-    ax.plot(real, label='Valor Real', color='#1f77b4', linewidth=2, alpha=0.9)
-    ax.plot(pred, label='Predicción LSTM', color='white', linestyle='--', linewidth=2)
-    ax.plot(ma, label=f'Promedio Móvil ({steps} pasos)', color='#2ca02c', alpha=0.7)
-    ax.plot(lr, label='Tendencia Lineal', color='#d62728', alpha=0.7)
+#def plot_results(real, pred, ma, lr, steps):
+#    """Genera el gráfico comparativo con estilo mejorado"""
+#    fig, ax = plt.subplots(figsize=(12, 6))
+ #   
+  #  # Personalización de colores y estilos
+ #   ax.plot(real, label='Valor Real', color='#1f77b4', linewidth=2, alpha=0.9)
+  #  ax.plot(pred, label='Predicción LSTM', color='white', linestyle='--', linewidth=2)
+   # ax.plot(ma, label=f'Promedio Móvil ({steps} pasos)', color='#2ca02c', alpha=0.7)
+    #ax.plot(lr, label='Tendencia Lineal', color='#d62728', alpha=0.7)
     
     # Configuración del gráfico
-    ax.set_title("Comparación: Valores Reales vs Predicciones", fontsize=14, pad=20)
-    ax.set_xlabel("Índice de Tiempo", fontsize=12)
-    ax.set_ylabel("Radiación Solar (W/m²)", fontsize=12)
-    ax.legend(fontsize=10, framealpha=0.9)
-    ax.grid(True, linestyle='--', alpha=0.3)
-    plt.tight_layout()
+   # ax.set_title("Comparación: Valores Reales vs Predicciones", fontsize=14, pad=20)
+    #ax.set_xlabel("Índice de Tiempo", fontsize=12)
+    #ax.set_ylabel("Radiación Solar (W/m²)", fontsize=12)
+    #ax.legend(fontsize=10, framealpha=0.9)
+    #ax.grid(True, linestyle='--', alpha=0.3)
+    #plt.tight_layout()
     
-    return fig
+    #return fig
+
+
+
 
 def interpret_radiation(value):
     """Traduce el valor de radiación a condiciones solares"""
@@ -141,13 +144,13 @@ def interpret_radiation(value):
         value = value[0] if len(value) > 0 else 0
     
     if value < 100:
-        return "☁️ Nublado - Baja producción solar"
+        return "Nublado - Baja producción solar"
     elif 100 <= value < 300:
-        return "⛅ Parcialmente nublado - Producción moderada"
+        return "Parcialmente nublado - Producción moderada"
     elif 300 <= value < 600:
-        return "🌤️ Mayormente soleado - Buena producción"
+        return "Mayormente soleado - Buena producción"
     else:
-        return "☀️ Soleado - Excelente producción solar"
+        return "Soleado - Excelente producción solar"
 
 def get_recommendation(avg_radiation):
     """Genera recomendaciones basadas en la radiación promedio"""
@@ -181,13 +184,80 @@ def get_recommendation(avg_radiation):
                 "Considerar excedentes para inyección a red"
             ]
         }
+def show_prediction_card(title, value, delta=None, interpretation=""):
+    """Muestra una tarjeta de predicción profesional"""
+    delta_html = f"<div style='color: #666; font-size: 14px;'>{delta}</div>" if delta else ""
+    
+    st.markdown(f"""
+    <div style="
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    ">
+        <h3 style="color: #003366; margin-top: 0;">{title}</h3>
+        <div style="font-size: 24px; font-weight: bold; color: #0066cc;">{value}</div>
+        {delta_html}
+        <div style="margin-top: 10px; padding: 10px; background: #f5f9ff; border-radius: 5px;">
+            {interpretation}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def plot_radiation_area(pred, time_steps=24):
+    """
+    Gráfico para radiación solar 
+    """
+    try:
+        plt.style.use('seaborn-v0_8-whitegrid')
+        
+        # Convertir a 1D si es necesario
+        pred = np.array(pred).flatten()  # Esto asegura 1D
+        
+        plt.rcParams.update({
+            'axes.facecolor': '#f0f2f6',
+            'figure.facecolor': '#f0f2f6',
+            'axes.edgecolor': '#333333',
+            'axes.labelcolor': '#333333',
+            'text.color': '#333333',
+            'xtick.color': '#333333',
+            'ytick.color': '#333333',
+            'grid.color': '#dddddd'
+        })
+
+        fig, ax = plt.subplots(figsize=(12, 6))
+        
+        # Asegurar que los datos sean 1D
+        ax.plot(pred[:time_steps], marker='o', linestyle='-', color='#007ACC', label='Predicción')
+        ax.fill_between(range(time_steps), pred[:time_steps], alpha=0.2, color='#007ACC')
+        
+        ax.set_title("Predicción de Radiación Solar (Próximas Horas)")
+        ax.set_xlabel("Horas")
+        ax.set_ylabel("Radiación Solar (W/m²)")
+        ax.grid(True)
+        ax.legend()
+        
+        plt.close(fig)
+        return fig
+
+    except Exception as e:
+        st.error(f"Error al generar el gráfico: {e}")
+        fig = plt.figure(figsize=(12, 6))
+        plt.close(fig)
+        return fig
+    except Exception as e:
+        st.error(f"Error al generar el gráfico: {e}")
+        fig = plt.figure(figsize=(12, 6))
+        plt.close(fig)
+        return fig
 
 # --------------------------------------------
 # Pestañas Principales
 # --------------------------------------------
-#import streamlit as st
 
-# Aplicar estilos a las palabras clave
+
+
 
 st.markdown("""
     <style>
@@ -252,18 +322,20 @@ with tab1:
             st.error(f"Error al leer el archivo: {str(e)}")
 
     # Configuración del modelo
-    if df is not None:
-        st.subheader("⚙️ Configuración del Modelo")
-        n_steps = st.slider('Número de pasos hacia atrás (lookback)', 
-                           min_value=1, 
-                           max_value=100, 
-                           value=24,
-                           help="Determina cuántos puntos anteriores usará el modelo para cada predicción")
+   if df is not None:
+        st.subheader("Configuración del Modelo")
+        n_steps = st.selectbox(
+            'Número de pasos hacia atrás (lookback)',
+            options=[1, 6, 12, 24, 48, 72],
+            index=3,
+            help="Determina cuántos puntos anteriores usará el modelo para cada predicción de 1 - 100"
+        )
         
         # Mostrar vista previa de datos
-        with st.expander("🔍 Vista previa de los datos"):
+        with st.expander("Vista previa de los datos"):
             st.dataframe(df.head(), height=150)
             st.write(f"Total de registros: {len(df)}")
+
 
         # Procesamiento y predicción
         if st.button("Ejecutar Predicción", type="primary"):
@@ -321,7 +393,7 @@ with tab1:
 
 with tab2:
     st.markdown("### <span class='highlight'>Resultados y Recomendaciones</span>", unsafe_allow_html=True)
-    st.subheader("Análisis y Recomendaciones")
+    st.subheader("Resultados de la Predicción")
 
     
     if "y_inv" not in st.session_state:
@@ -336,7 +408,7 @@ with tab2:
         scaler = st.session_state.get("scaler", None)
         
         # Mostrar predicciones para diferentes lapsos
-        st.subheader("🔮 Predicción para Próximas Horas")
+        st.subheader("Predicción para Próximas Horas")
         
         cols = st.columns(4)
         time_intervals = [1, 3, 6, 12]
@@ -354,32 +426,22 @@ with tab2:
                         delta_text = f"{delta_pct:.1f}%"
                         delta_color = "inverse" if delta_pct < 0 else "normal"
                     else:
-                        delta_text = "N/A"
+                        delta_text = " "
                         delta_color = "off"
                     
                     # Mostrar métrica
-                    st.metric(
-                        label=f"Próximas {hours} hora{'s' if hours > 1 else ''}",
+                     # Mostrar tarjeta de predicción
+                    show_prediction_card(
+                        title=f"Próximas {hours} hora{'s' if hours > 1 else ''}",
                         value=f"{avg_pred:.1f} W/m²",
                         delta=delta_text,
-                        delta_color=delta_color,
-                        help=f"Predicción promedio para las próximas {hours} horas"
-                    )
+                        interpretation=interpret_radiation(avg_pred))
                     
-                    # Mostrar condición interpretada
-                    condition = interpret_radiation(avg_pred)
-                    st.markdown(f"**Condición esperada:** {condition}")
-                    
-                    # Mostrar valores mínimos y máximos en el periodo
-                    st.markdown(f"""
-                    - Mínimo: {np.min(pred_values):.1f} W/m²  
-                    - Máximo: {np.max(pred_values):.1f} W/m²
-                    """)
                 else:
                     st.warning(f"No hay suficientes datos para {hours} horas")
         
         # Mostrar métricas de rendimiento
-        st.subheader("📊 Métricas de Rendimiento del Modelo")
+        st.subheader("Métricas de Rendimiento del Modelo")
         col1, col2, col3 = st.columns(3)
         
         with col1:
@@ -398,12 +460,12 @@ with tab2:
                      help="Proporción de la varianza explicada por el modelo (0-1)")
         
         # Gráfico de resultados mejorado
-        st.subheader("📈 Comparación Visual")
-        fig = plot_results(y_inv, y_pred_inv, y_ma, y_lr, n_steps)
+        st.subheader("Distribución Horaria de Radiación")
+        fig = plot_radiation_area(y_pred_inv, time_steps=n_steps)
         st.pyplot(fig)
-        
+                
         # Recomendaciones basadas en la predicción
-        st.subheader("💡 Recomendaciones para Sistemas Solares")
+        st.subheader("Recomendaciones para Sistemas Solares")
         avg_next_6h = np.mean(y_pred_inv[:6]) if len(y_pred_inv) >= 6 else np.mean(y_pred_inv)
         recommendation = get_recommendation(avg_next_6h)
         
@@ -430,11 +492,11 @@ with tab2:
             st.markdown(f"- {item}")
         
         # Predicción extendida (opcional)
-        with st.expander("🔮 Predicción extendida para las próximas 24 horas"):
+        with st.expander("Predicción extendida para las próximas 24 horas"):
             if len(y_pred_inv) >= 24:
                 extended_pred = y_pred_inv[:24]
                 extended_fig, ax = plt.subplots(figsize=(12, 4))
-                ax.plot(extended_pred, color='#ff7f0e', linestyle='-', linewidth=2)
+                ax.plot(extended_pred, color='#0066cc', linestyle='-', linewidth=2)
                 ax.set_title("Predicción de radiación solar - Próximas 24 horas", fontsize=12)
                 ax.set_xlabel("Horas", fontsize=10)
                 ax.set_ylabel("Radiación (W/m²)", fontsize=10)
@@ -452,7 +514,7 @@ with tab2:
                 st.warning("No hay suficientes datos para mostrar la predicción de 24 horas")
         
         # Descarga de resultados
-        st.subheader("📥 Exportar Resultados")
+        st.subheader("Exportar Resultados")
         pred_df = pd.DataFrame({
             'Real': y_inv.flatten(),
             'Prediccion_LSTM': y_pred_inv.flatten(),
@@ -463,7 +525,6 @@ with tab2:
         # Convertir a CSV
         csv = pred_df.to_csv(index=False).encode('utf-8')
         
-        # Botones de descarga
         # Botones de descarga
         col1, col2 = st.columns(2)
         with col1:
@@ -476,22 +537,30 @@ with tab2:
             )
         
         with col2:
-            # Convertir la figura a bytes antes de la descarga
-            from io import BytesIO
-            buf = BytesIO()
-            fig.savefig(buf, format="png")
-            buf.seek(0)
+            # Crear una figura nueva para la descarga
+            fig_descarga = plt.figure(figsize=(12, 6))
+            plt.plot(y_pred_inv[:24], color='#0066cc', linewidth=2)
+            plt.title("Predicción de Radiación Solar")
+            plt.xlabel("Horas")
+            plt.ylabel("Radiación (W/m²)")
+            plt.grid(True, linestyle='--', alpha=0.3)
             
+            # Guardar la figura en un buffer de memoria
+            buffer = BytesIO()
+            fig_descarga.savefig(buffer, format="png", dpi=300, bbox_inches='tight')
+            plt.close(fig_descarga)  # Cerrar la figura para liberar memoria
+            buffer.seek(0)  # Rebobinar el buffer al inicio
+            
+            # Botón de descarga
             st.download_button(
                 label="Descargar Gráfico",
-                data=buf,
-                file_name='grafico_prediccion.png',
-                mime='image/png',
-                help="Descarga el gráfico como imagen PNG"
+                data=buffer,
+                file_name='prediccion_radiacion.png',
+                mime='image/png'
             )
         
         # Explicación técnica
-        with st.expander("🔍 Detalles Técnicos"):
+        with st.expander("Detalles Técnicos"):
             st.markdown("""
             **Modelo LSTM utilizado:**
             - Arquitectura: 2 capas LSTM con 50 neuronas cada una
@@ -510,6 +579,7 @@ with tab2:
             - 300-600 W/m²: Mayormente soleado
             - > 600 W/m²: Soleado
             """.format(n_steps))
+
 with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
         st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en la siguiente casilla, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
