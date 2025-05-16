@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://thumbs.dreamstime.com/b/green-energy-planet-earth-solar-panels-windmills-nature-areas-276574908.jpg");
+            background-image: url("https://raw.githubusercontent.com/jaimearce/mi-app-lstm-radiacion/main/fondo.jpg");
             background-size: 50% ; /* Ajusta el tamaño según necesites */
             background-position: center;
         }
