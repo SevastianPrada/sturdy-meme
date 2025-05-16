@@ -201,7 +201,7 @@ st.markdown("""
 tab1, tab2 = st.tabs(["🧪 Predicción", "📊 Resultados y Recomendaciones"])
 
 with tab1:
-    st.markdown("#002c36 <span class='highlight'>Predicción</span>", unsafe_allow_html=True)
+    st.markdown("### <span class='highlight'>Predicción</span>", unsafe_allow_html=True)
     st.subheader("📂 Carga de Datos")
 
     # Opciones de datos predefinidos
@@ -319,7 +319,7 @@ with tab1:
                         st.error("Asegúrese que el archivo 'modelo_lstm_radiacion.keras' está en el directorio correcto")
 
 with tab2:
-    st.markdown("#002c36 <span class='highlight'>Resultados y Recomendaciones</span>", unsafe_allow_html=True)
+    st.markdown("### <span class='highlight'>Resultados y Recomendaciones</span>", unsafe_allow_html=True)
     st.subheader("📊 Análisis y Recomendaciones")
 
     
