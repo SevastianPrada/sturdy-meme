@@ -566,7 +566,7 @@ if uploaded_file is not None:
             st.pyplot(plt)
 
         # Filtrar datos y guardar archivo final
-        #df_filtrado = df.iloc[:5088]
+        df_filtrado = df.iloc[:0]
         df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
         st.write("✅ ¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
 
