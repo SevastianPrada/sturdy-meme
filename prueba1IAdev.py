@@ -198,7 +198,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-tab1, tab2 = st.tabs(["🧪 Predicción", "📊 Resultados y Recomendaciones"])
+tab1, tab2, tab3 = st.tabs(["Predicción", "Resultados y Recomendaciones", "¿No sabes comno filtrar tu hoja de datos?, Presiona aquí."])
 
 with tab1:
     st.markdown("### <span class='highlight'>Predicción</span>", unsafe_allow_html=True)
@@ -509,3 +509,6 @@ with tab2:
             - 300-600 W/m²: Mayormente soleado
             - > 600 W/m²: Soleado
             """.format(n_steps))
+with tab3
+        st.markdown("### <span class='highlight'>¿No sabes comno filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
+        st.subheader("📊 Análisis y Recomendaciones")
