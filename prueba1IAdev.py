@@ -582,7 +582,7 @@ with tab3:
                 st.pyplot(plt)
         
             # Filtrar datos y guardar archivo final asegurando separación por comas
-            df_filtrado = df.iloc[:0]
+            df_filtrado = df.iloc[:1000]
             df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False, sep=",")
             st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
         
