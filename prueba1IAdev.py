@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://c.pxhere.com/photos/f2/f9/photo-61765.jpg!d");
+            background-image: url("https://thumbs.dreamstime.com/b/green-energy-planet-earth-solar-panels-windmills-nature-areas-276574908.jpg");
             background-size: cover;
             background-position: center;
         }
