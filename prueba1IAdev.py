@@ -21,7 +21,7 @@ st.markdown(
     <style>
         [data-testid="stAppViewContainer"] {
             background-image: url("https://raw.githubusercontent.com/jaimearce/mi-app-lstm-radiacion/main/fondo.jpg");
-            background-size: 50% ; /* Ajusta el tamaño según necesites */
+            background-size: 100% ; /* Ajusta el tamaño según necesites */
             background-position: center;
         }
     </style>
