@@ -511,5 +511,5 @@ with tab2:
             """.format(n_steps))
 with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
-        st.subheader("como filtrar tu hoja de datos")
-        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial")
+        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo 
+        de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial.")
