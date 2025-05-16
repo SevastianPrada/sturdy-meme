@@ -322,14 +322,14 @@ with tab1:
             st.error(f"Error al leer el archivo: {str(e)}")
 
     # Configuración del modelo
-   if df is not None:
-        st.subheader("Configuración del Modelo")
-        n_steps = st.selectbox(
-            'Número de pasos hacia atrás (lookback)',
-            options=[1, 6, 12, 24, 48, 72],
-            index=3,
-            help="Determina cuántos puntos anteriores usará el modelo para cada predicción de 1 - 100"
-        )
+    if df is not None:
+            st.subheader("Configuración del Modelo")
+            n_steps = st.selectbox(
+                'Número de pasos hacia atrás (lookback)',
+                options=[1, 6, 12, 24, 48, 72],
+                index=3,
+                help="Determina cuántos puntos anteriores usará el modelo para cada predicción de 1 - 100"
+            )
         
         # Mostrar vista previa de datos
         with st.expander("Vista previa de los datos"):
