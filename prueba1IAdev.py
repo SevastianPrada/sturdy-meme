@@ -571,7 +571,7 @@ with tab3:
             st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
         
             # Permitir la descarga del archivo procesado
-            st.download_button(label="⬇️ Descargar archivo procesado", data=open("BaseDatos_filtrado.csv", "rb"), file_name="BaseDatos_filtrado.csv", mime="text/csv")
+        st.download_button(label="⬇️ Descargar archivo procesado", data=open("BaseDatos_filtrado.csv", "rb"), file_name="BaseDatos_filtrado.csv", mime="text/csv")
 
             # Asegurar que el archivo existe antes de permitir la descarga
             file_path = "BaseDatos_filtrado.csv"
