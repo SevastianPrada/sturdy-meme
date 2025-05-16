@@ -558,15 +558,11 @@ with tab3:
             df.to_csv('BaseDatos_2.csv', index=False)
             st.write("¡Archivo BaseDatos_2.csv guardado con éxito!")
         
-            # Mostrar número total de filas y verificar valores nulos
-            st.write("Número total de filas:", len(df))
+            #verificar valores nulos
             st.write(df.isnull().sum())
-    
-            # Generar matriz de correlación
-            corr_matrix = df.corr(numeric_only=True)
             
             # Filtrar el DataFrame y guardar el archivo final
-            #df_filtrado = df.iloc[:5088]
+            df_filtrado = df.iloc[:15]
             df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
             st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
         
