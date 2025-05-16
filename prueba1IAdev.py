@@ -516,67 +516,64 @@ with tab3:
 
         # Crear el elemento de carga de archivos
         uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
+import streamlit as st
+import pandas as pd
 
-        if uploaded_file is not None:
-            # Leer el archivo subido por el usuario
-            df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
-    
-            # Mostrar los primeros registros
-            st.write("Primeros registros desde la fila 16:")
-            st.write(df.head())
-    
-             # Verificar las columnas del DataFrame
-            st.write("Columnas Antes:", df.columns)
+# Crear el cargador de archivos
+uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
+
+if uploaded_file is not None:
+    # Leer el archivo subido por el usuario
+    df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
+
+    # Mostrar los primeros registros
+    st.write("Primeros registros desde la fila 16:")
+    st.write(df.head())
+
+    # Verificar las columnas del DataFrame
+    st.write("Columnas Antes:", df.columns)
 
     # Si todas las columnas están en una sola cadena, dividirlas en columnas separadas
-        if len(df.columns) == 1 and df.columns[0] == 'YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_SFC_SW_DNI,T2M,RH2M,PS,WS10M':
-            df = df.iloc[:, 0].str.split(',', expand=True)
-            df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
+    if len(df.columns) == 1 and df.columns[0] == 'YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_SFC_SW_DNI,T2M,RH2M,PS,WS10M':
+        df = df.iloc[:, 0].str.split(',', expand=True)
+        df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
                       'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
+
+    # Convertir las columnas YEAR, MO, DY, HR en una sola columna
+    df[['YEAR', 'MO', 'DY', 'HR']] = df[['YEAR', 'MO', 'DY', 'HR']].astype(str)
+    df['datetime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
+    df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
+
+    # Definir nuevo orden de columnas
+    nuevo_orden = ['datetime', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
+    df = df[nuevo_orden]
+
+    # Ordenar el dataset de forma ascendente
+    df.sort_values(by="datetime", inplace=True)
+
+    # Guardar el archivo modificado
+    df.to_csv('BaseDatos_2.csv', index=False)
+    st.write("✅ ¡Archivo BaseDatos_2.csv guardado con éxito!")
+
+    # Verificar valores nulos
+    st.write("🔎 Valores nulos en el DataFrame:", df.isnull().sum())
+
+    # Filtrar el DataFrame y guardar el archivo final
+    df_filtrado = df.iloc[:15]
+    df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
+    st.write("✅ ¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
+
+    # Permitir la descarga del archivo procesado
+    file_path = "BaseDatos_filtrado.csv"
     
-            # Convertir las columnas YEAR, MO, DY, HR en una sola columna
-            df['YEAR'] = df['YEAR'].astype(str)
-            df['MO'] = df['MO'].astype(str)
-            df['DY'] = df['DY'].astype(str)
-            df['HR'] = df['HR'].astype(str)
-
-            
-            # Crear columna datetime
-            df['datetime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
-            df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
-
-            
-            # Definir nuevo orden de columnas
-            nuevo_orden = ['datetime', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
-            df = df[nuevo_orden]
-
-            
-            # Ordenar el dataset de forma ascendente
-            df.sort_values(by="datetime", inplace=True)
-        
-            # Guardar el archivo modificado
-            df.to_csv('BaseDatos_2.csv', index=False)
-            st.write("¡Archivo BaseDatos_2.csv guardado con éxito!")
-        
-            #verificar valores nulos
-            st.write(df.isnull().sum())
-            
-            # Filtrar el DataFrame y guardar el archivo final
-            df_filtrado = df.iloc[:15]
-            df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
-            st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
-        
-            # Permitir la descarga del archivo procesado
-        st.download_button(label="⬇️ Descargar archivo procesado", data=open("BaseDatos_filtrado.csv", "rb"), file_name="BaseDatos_filtrado.csv", mime="text/csv")
-
-        # Asegurar que el archivo existe antes de permitir la descarga
-        file_path = "BaseDatos_filtrado.csv"
-
-        if file_path:
-            with open(file_path, "rb") as file:
-                st.download_button(
+    try:
+        with open(file_path, "rb") as file:
+            st.download_button(
                 label="⬇️ Descargar archivo procesado",
                 data=file,
                 file_name="BaseDatos_filtrado.csv",
                 mime="text/csv"
-                )
+            )
+    except FileNotFoundError:
+        st.error("❌ Error: No se encontró el archivo `BaseDatos_filtrado.csv`. Verifica que se haya generado correctamente.")
+
