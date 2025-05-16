@@ -511,5 +511,17 @@ with tab2:
             """.format(n_steps))
 with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
-        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo 
-        de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial.")
+        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial.")
+
+        # Crear el elemento de carga de archivos
+        uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
+
+            if uploaded_file is not None:
+            # Leer el archivo subido por el usuario
+            df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
+    
+            # Mostrar los primeros registros
+            st.write("Primeros registros desde la fila 16:")
+            st.write(df.head())
+    
+
