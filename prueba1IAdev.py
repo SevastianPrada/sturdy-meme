@@ -199,7 +199,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-tab1, tab2, tab3 = st.tabs(["Predicción", "Resultados y Recomendaciones", "¿No sabes comno filtrar tu hoja de datos?, Presiona aquí."])
+tab1, tab2, tab3 = st.tabs(["Predicción", "Resultados y Recomendaciones", "¿No sabes como filtrar tu hoja de datos? Nosotros te ayudamos."])
 
 with tab1:
     st.markdown("### <span class='highlight'>Predicción</span>", unsafe_allow_html=True)
@@ -512,7 +512,7 @@ with tab2:
             """.format(n_steps))
 with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
-        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
+        st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en la siguiente casilla, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
 
         # Interfaz de carga de archivo CSV en Streamlit
         uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
