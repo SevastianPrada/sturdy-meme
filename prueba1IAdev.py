@@ -514,7 +514,6 @@ with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
         st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
 
-        
         # Interfaz de carga de archivo CSV en Streamlit
         uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
         
@@ -550,8 +549,8 @@ with tab3:
             # Eliminar las columnas utilizadas para el 'datetime'
             df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
         
-            # Guardar archivo modificado
-            df.to_csv('BaseDatos_1.csv', index=False)
+            # Guardar archivo modificado asegurando separación por comas
+            df.to_csv('BaseDatos_1.csv', index=False, sep=",")
             st.write("¡Archivo BaseDatos_1.csv guardado con éxito!")
         
             # Definir nuevo orden de columnas
@@ -561,8 +560,8 @@ with tab3:
             # Ordenar el dataset de forma ascendente según datatime
             df.sort_index(inplace=True)
         
-            # Guardar archivo modificado
-            df.to_csv('BaseDatos_2.csv', index=False)
+            # Guardar archivo modificado asegurando separación por comas
+            df.to_csv('BaseDatos_2.csv', index=False, sep=",")
             st.write("¡Archivo BaseDatos_2.csv guardado con éxito!")
         
             # Número total de filas
@@ -582,10 +581,9 @@ with tab3:
                 plt.title("Matriz de Correlación de BaseDatos_2.csv")
                 st.pyplot(plt)
         
-            # Filtrar datos y guardar archivo final
-            
-            #df_filtrado = df.iloc[:5088]
-            #df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
+            # Filtrar datos y guardar archivo final asegurando separación por comas
+            df_filtrado = df.iloc[:1]
+            df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False, sep=",")
             st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
         
             # Permitir la descarga del archivo procesado en Streamlit
@@ -599,4 +597,3 @@ with tab3:
         
             # Mostrar el DataFrame final
             st.write(df_filtrado)
-        
