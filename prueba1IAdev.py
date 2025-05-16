@@ -120,7 +120,7 @@ def plot_results(real, pred, ma, lr, steps):
     
     # Personalización de colores y estilos
     ax.plot(real, label='Valor Real', color='#1f77b4', linewidth=2, alpha=0.9)
-    ax.plot(pred, label='Predicción LSTM', color='#ff7f0e', linestyle='--', linewidth=2)
+    ax.plot(pred, label='Predicción LSTM', color='white', linestyle='--', linewidth=2)
     ax.plot(ma, label=f'Promedio Móvil ({steps} pasos)', color='#2ca02c', alpha=0.7)
     ax.plot(lr, label='Tendencia Lineal', color='#d62728', alpha=0.7)
     
