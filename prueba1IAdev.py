@@ -564,12 +564,7 @@ with tab3:
     
             # Generar matriz de correlación
             corr_matrix = df.corr(numeric_only=True)
-        if not corr_matrix.empty:
-            plt.figure(figsize=(10, 6))
-            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
-            plt.title("Matriz de Correlación de BaseDatos_2.csv")
-            st.pyplot(plt)
-    
+            
             # Filtrar el DataFrame y guardar el archivo final
             df_filtrado = df.iloc[:5088]
             df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
