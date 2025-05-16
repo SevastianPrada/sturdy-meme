@@ -187,23 +187,13 @@ def get_recommendation(avg_radiation):
 #import streamlit as st
 
 # Aplicar estilos a las palabras clave
+
 st.markdown("""
     <style>
         .prediccion { color: #002c36; font-weight: bold; }
         .resultados { color: #002c36; font-weight: bold; }
     </style>
     """, unsafe_allow_html=True)
-
-tab1, tab2 = st.tabs([
-    "<span class='prediccion'>☀️ Predicción</span>",
-    "<span class='resultados'>📊 Resultados y Recomendaciones</span>"
-])
-
-with tab1:
-    st.subheader("📂 Carga de Datos")
-
-with tab2:
-    st.subheader("📊 Análisis y Recomendaciones")
 
 tab1, tab2 = st.tabs(["🧪 Predicción", "📊 Resultados y Recomendaciones"])
 
