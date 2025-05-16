@@ -14,6 +14,7 @@ from sklearn.preprocessing import MinMaxScaler
 import requests
 from io import StringIO
 from datetime import datetime
+import seaborn as sns
 
 #imagen de fondo
 st.markdown(
@@ -516,12 +517,12 @@ with tab3:
         # Crear el elemento de carga de archivos
         uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
 
-            if uploaded_file is not None:
-                # Leer el archivo subido por el usuario
-                df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
+        if uploaded_file is not None:
+            # Leer el archivo subido por el usuario
+            df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
     
-                # Mostrar los primeros registros
-                st.write("Primeros registros desde la fila 16:")
-                st.write(df.head())
+            # Mostrar los primeros registros
+            st.write("Primeros registros desde la fila 16:")
+            st.write(df.head())
     
 
