@@ -514,11 +514,6 @@ with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
         st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
 
-import streamlit as st
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
 # Interfaz de carga de archivo CSV en Streamlit
 uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
 
