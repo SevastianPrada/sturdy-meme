@@ -333,8 +333,8 @@ with tab1:
         
         # Mostrar vista previa de datos
         with st.expander("Vista previa de los datos"):
-            st.dataframe(df.head(), height=150)
-            st.write(f"Total de registros: {len(df)}")
+                st.dataframe(df.head(), height=150)
+                st.write(f"Total de registros: {len(df)}")
 
 
         # Procesamiento y predicción
