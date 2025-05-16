@@ -191,7 +191,7 @@ def get_recommendation(avg_radiation):
 st.markdown("""
     <style>
         .highlight {
-            color: #002c36; /* Cambia el color aquí */
+            color: white; /* Cambia el color aquí */
             font-weight: bold;
         }
     </style>
