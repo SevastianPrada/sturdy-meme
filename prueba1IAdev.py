@@ -452,17 +452,17 @@ with tab2:
         recommendation = get_recommendation(avg_next_6h)
         
             # Mostrar alerta según el nivel de radiación
-            if recommendation["color"] == "red":
+        if recommendation["color"] == "red":
                 st.error(f"""
                 **{recommendation['message']}**  
                 {interpret_radiation(avg_next_6h)}
                 """)
-            elif recommendation["color"] == "orange":
+        elif recommendation["color"] == "orange":
                 st.warning(f"""
                 **{recommendation['message']}**  
                 {interpret_radiation(avg_next_6h)}
                 """)
-            else:
+        else:
                 st.success(f"""
                 **{recommendation['message']}**  
                 {interpret_radiation(avg_next_6h)}
