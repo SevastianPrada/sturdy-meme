@@ -533,24 +533,24 @@ with tab3:
             df = df.iloc[:, 0].str.split(',', expand=True)
             df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
                       'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
-
-            # Mostrar columnas después de la división
-            st.write("Columnas después:", df.columns)
     
             # Convertir las columnas YEAR, MO, DY, HR en una sola columna
             df['YEAR'] = df['YEAR'].astype(str)
             df['MO'] = df['MO'].astype(str)
             df['DY'] = df['DY'].astype(str)
             df['HR'] = df['HR'].astype(str)
-        
+
+            
             # Crear columna datetime
             df['datetime'] = pd.to_datetime(df[['YEAR', 'MO', 'DY', 'HR']].apply('-'.join, axis=1), format='%Y-%m-%d-%H')
             df = df.drop(columns=['YEAR', 'MO', 'DY', 'HR'])
-        
+
+            
             # Definir nuevo orden de columnas
             nuevo_orden = ['datetime', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
             df = df[nuevo_orden]
-        
+
+            
             # Ordenar el dataset de forma ascendente
             df.sort_values(by="datetime", inplace=True)
         
