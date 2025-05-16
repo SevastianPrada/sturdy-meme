@@ -190,16 +190,23 @@ def get_recommendation(avg_radiation):
 
 st.markdown("""
     <style>
-        .prediccion { color: #002c36; font-weight: bold; }
-        .resultados { color: #002c36; font-weight: bold; }
+        .highlight {
+            color: red; /* Cambia el color aquí */
+            font-weight: bold;
+        }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
+
+tab1, tab2 = st.tabs(["☀️ Predicción", "📊 Resultados y Recomendaciones"])
+
+
 
 tab1, tab2 = st.tabs(["🧪 Predicción", "📊 Resultados y Recomendaciones"])
 
 with tab1:
+    st.markdown("### <span class='highlight'>Predicción</span>", unsafe_allow_html=True)
     st.subheader("📂 Carga de Datos")
-    
+
     # Opciones de datos predefinidos
     dataset_option = st.selectbox("Selecciona una ubicación de datos (NASA POWER)", [
        "Seleccionar...", 
@@ -315,7 +322,9 @@ with tab1:
                         st.error("Asegúrese que el archivo 'modelo_lstm_radiacion.keras' está en el directorio correcto")
 
 with tab2:
-    st.subheader("📈 Resultados de la Predicción")
+    st.markdown("### <span class='highlight'>Resultados y Recomendaciones</span>", unsafe_allow_html=True)
+    st.subheader("📊 Análisis y Recomendaciones")
+
     
     if "y_inv" not in st.session_state:
         st.info("ℹ️ Realiza una predicción en la pestaña anterior para ver los resultados")
