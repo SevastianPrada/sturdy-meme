@@ -514,6 +514,11 @@ with tab3:
         st.markdown("### <span class='highlight'>¿No sabes como filtrar tu hoja de datos?</span>", unsafe_allow_html=True)
         st.text("Si no conoces el procedimiento de filtrado de datos para el uso en nuestra pagina, Solo sube el archivo en el siguiente slot, nuestro codigo de manera automatica filtrará tus datos y podrás descargar un formato compatible con nuestra intelegencia artificial, procura que tu informació contenga datos no nulos de ALLSKY_SFC_SW_DWN.")
 
+import streamlit as st
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 # Interfaz de carga de archivo CSV en Streamlit
 uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
 
@@ -532,7 +537,7 @@ if uploaded_file is not None:
     if len(df.columns) == 1 and 'YEAR,MO,DY,HR' in df.columns[0]:
         df = df.iloc[:, 0].str.split(',', expand=True)
         df.columns = ['YEAR', 'MO', 'DY', 'HR', 'ALLSKY_SFC_SW_DWN', 'CLRSKY_SFC_SW_DWN', 
-                      'ALLSKY_SFC_SW_DNI', 'T2M', 'RH2M', 'PS', 'WS10M']
+                      'ALLSKY_SFC_SW_DNI', 'RH2M', 'PS', 'WS10M', 'T2M']
 
     # Convertir columnas a tipo string
     required_columns = ['YEAR', 'MO', 'DY', 'HR']
@@ -566,7 +571,7 @@ if uploaded_file is not None:
             st.pyplot(plt)
 
         # Filtrar datos y guardar archivo final
-        df_filtrado = df.iloc[:0]
+        df_filtrado = df.iloc[:5088]
         df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False)
         st.write("✅ ¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
 
