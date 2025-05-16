@@ -517,11 +517,11 @@ with tab3:
         uploaded_file = st.file_uploader("📂 Carga tu archivo CSV", type=["csv"])
 
             if uploaded_file is not None:
-            # Leer el archivo subido por el usuario
-            df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
+                # Leer el archivo subido por el usuario
+                df = pd.read_csv(uploaded_file, delimiter=';', skiprows=15)
     
-            # Mostrar los primeros registros
-            st.write("Primeros registros desde la fila 16:")
-            st.write(df.head())
+                # Mostrar los primeros registros
+                st.write("Primeros registros desde la fila 16:")
+                st.write(df.head())
     
 
