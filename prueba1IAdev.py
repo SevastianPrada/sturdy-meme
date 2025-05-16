@@ -582,8 +582,8 @@ with tab3:
                 st.pyplot(plt)
         
             # Filtrar datos y guardar archivo final asegurando separación por comas
-            df_filtrado = df.iloc[:1]
-            df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False, sep=",")
+            #df_filtrado = df.iloc[:1]
+            #df_filtrado.to_csv('BaseDatos_filtrado.csv', index=False, sep=",")
             st.write("¡Archivo BaseDatos_filtrado.csv guardado con éxito!")
         
             # Permitir la descarga del archivo procesado en Streamlit
