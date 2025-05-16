@@ -120,9 +120,10 @@ def create_sequences(data, steps):
 
 
 def interpret_radiation(value):
+    """Traduce el valor de radiación a condiciones solares con color azul turquesa"""
     if isinstance(value, (np.ndarray, list)):
         value = value[0] if len(value) > 0 else 0
-    
+
     if value < 100:
         return "<span style='color:#5D9FE9;'>Nublado - Baja producción solar</span>"
     elif 100 <= value < 300:
@@ -130,7 +131,7 @@ def interpret_radiation(value):
     elif 300 <= value < 600:
         return "<span style='color:#5D9FE9;'>Mayormente soleado - Buena producción</span>"
     else:
-        return "Soleado - Excelente producción solar</span>"
+        return "<span style='color:#5D9FE9;'>Soleado - Excelente producción solar</span>"  # Se agregó el cierre correcto
 
 def get_recommendation(avg_radiation):
     """Genera recomendaciones basadas en la radiación promedio"""
