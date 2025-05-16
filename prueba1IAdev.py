@@ -20,7 +20,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://www.freepik.es/imagen-ia-premium/visualizacion-3d-tecnologia-inteligente-agricultura_404401592.htm#fromView=search&page=1&position=45&uuid=b150c6ec-11c8-418b-a225-609c68d90a97&query=fondos+para+appweb+Tecnologia+medio++ambiente");
+            background-image: url("https://th.bing.com/th/id/OIP.dJon0XK--BvOwnn8nZ-4dgHaE8?cb=iwc2&rs=1&pid=ImgDetMain");
             background-size: cover;
             background-position: center;
         }
