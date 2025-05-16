@@ -562,8 +562,8 @@ with tab3:
             st.write("Número total de filas:", len(df))
             st.write(df.isnull().sum())
     
-                # Generar matriz de correlación
-                corr_matrix = df.corr(numeric_only=True)
+            # Generar matriz de correlación
+            corr_matrix = df.corr(numeric_only=True)
         if not corr_matrix.empty:
             plt.figure(figsize=(10, 6))
             sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
