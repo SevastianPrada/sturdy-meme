@@ -120,7 +120,6 @@ def create_sequences(data, steps):
 
 
 def interpret_radiation(value):
-    """Traduce el valor de radiación a condiciones solares con color azul turquesa"""
     if isinstance(value, (np.ndarray, list)):
         value = value[0] if len(value) > 0 else 0
     
@@ -446,28 +445,25 @@ with tab2:
         fig = plot_radiation_area(y_pred_inv, time_steps=n_steps)
         st.pyplot(fig)
                 
-        # Recomendaciones basadas en la predicción
-        st.subheader("Recomendaciones para Sistemas Solares")
-        avg_next_6h = np.mean(y_pred_inv[:6]) if len(y_pred_inv) >= 6 else np.mean(y_pred_inv)
-        recommendation = get_recommendation(avg_next_6h)
-        
-        # Mostrar alerta según el nivel de radiación
-        if recommendation["color"] == "red":
-            st.error(f"""
-            **{recommendation['message']}**  
-            {interpret_radiation(avg_next_6h)}
-            """)
-        elif recommendation["color"] == "orange":
-            st.warning(f"""
-            **{recommendation['message']}**  
-            {interpret_radiation(avg_next_6h)}
-            """)
-        else:
-            st.success(f"""
-            **{recommendation['message']}**  
-            {interpret_radiation(avg_next_6h)}
-            """)
-        
+if recommendation and isinstance(recommendation, dict) and "color" in recommendation:
+    if recommendation["color"] == "red":
+        st.error(f"""
+        **{recommendation['message']}**  
+        {interpret_radiation(avg_next_6h)}
+        """)
+    elif recommendation["color"] == "orange":
+        st.warning(f"""
+        **{recommendation['message']}**  
+        {interpret_radiation(avg_next_6h)}
+        """)
+    else:
+        st.success(f"""
+        **{recommendation['message']}**  
+        {interpret_radiation(avg_next_6h)}
+        """)
+else:
+    st.error("❌ Error: No se pudo generar una recomendación válida.")
+
         # Mostrar recomendaciones en lista
         st.markdown("**Acciones recomendadas:**")
         for item in recommendation["recommendations"]:
