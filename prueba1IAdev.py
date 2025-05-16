@@ -34,7 +34,7 @@ st.markdown(
 # Configuración inicial de la página de Streamlit
 #Titulos Centrado
 st.markdown(
-    "<h1 style='text-align: center; color: #002c36;'>☀️&nbsp;Predicción de Radiación Solar&nbsp;☀️</h1>",
+    "<h1 style='text-align: center; color: white'>☀️&nbsp;Predicción de Radiación Solar&nbsp;☀️</h1>",
     unsafe_allow_html=True
 )
 
@@ -47,7 +47,7 @@ with st.expander("🧠 ¿Cómo usar esta app? Haz clic aquí"):
     st.markdown("""
     <style>
         div.stExpander div div {
-            color: #002c36 !important; /* Cambia el color aquí */
+            color: white !important; /* Cambia el color aquí */
             font-weight: bold; /* Opcional: hacer el texto más visible */
         }
     </style>
