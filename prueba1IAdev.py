@@ -21,7 +21,7 @@ st.markdown(
     <style>
         [data-testid="stAppViewContainer"] {
             background-image: url("https://thumbs.dreamstime.com/b/green-energy-planet-earth-solar-panels-windmills-nature-areas-276574908.jpg");
-            background-size: cover;
+            background-size: 150% 150%; /* Ajusta el tamaño según necesites */
             background-position: center;
         }
     </style>
