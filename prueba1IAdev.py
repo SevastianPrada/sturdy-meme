@@ -15,6 +15,8 @@ import requests
 from io import StringIO
 from datetime import datetime
 import seaborn as sns
+from io import BytesIO
+from datetime import datetime
 
 #imagen de fondo
 st.markdown(
