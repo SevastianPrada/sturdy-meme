@@ -452,22 +452,24 @@ with tab2:
         avg_next_6h = np.mean(y_pred_inv[:6]) if len(y_pred_inv) >= 6 else np.mean(y_pred_inv)
         recommendation = get_recommendation(avg_next_6h)
         
-            # Mostrar alerta según el nivel de radiación
+             # Mostrar alerta según el nivel de radiación
         if recommendation["color"] == "red":
-                st.error(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
+            st.error(f"""
+            **{recommendation['message']}**  
+            """)
+            st.markdown(interpret_radiation(avg_next_6h), unsafe_allow_html=True)
+        
         elif recommendation["color"] == "orange":
-                st.warning(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
+            st.warning(f"""
+            **{recommendation['message']}**  
+            """)
+            st.markdown(interpret_radiation(avg_next_6h), unsafe_allow_html=True)
+        
         else:
-                st.success(f"""
-                **{recommendation['message']}**  
-                {interpret_radiation(avg_next_6h)}
-                """)
+            st.success(f"""
+            **{recommendation['message']}**  
+            """)
+            st.markdown(interpret_radiation(avg_next_6h), unsafe_allow_html=True)
 
         # Predicción extendida (opcional)
         with st.expander("Predicción extendida para las próximas 24 horas"):
