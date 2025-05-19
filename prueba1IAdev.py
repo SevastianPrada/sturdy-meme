@@ -23,7 +23,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://raw.githubusercontent.com/jaimearce/mi-app-lstm-radiacion/main/fondo.jpg");
+            background-image: url("https://github.com/SevastianPrada/sturdy-meme/blob/e8b703eef1ba48789c9c7182251fc70b33e185bc/SkyGhil.avif");
             background-size: 100% ; /* Ajusta el tamaño según necesites */
             background-position: center;
         }
