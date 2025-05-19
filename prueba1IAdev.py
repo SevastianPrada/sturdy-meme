@@ -23,7 +23,7 @@ st.markdown(
     """
     <style>
         [data-testid="stAppViewContainer"] {
-            background-image: url("https://github.com/SevastianPrada/sturdy-meme/blob/a18f150a93786201d5761b4e6317ddc270eabf91/Fondo1.jpg");
+            background-image: url("Fondo1.jpg");
             background-size: 100% ; /* Ajusta el tamaño según necesites */
             background-position: center;
         }
