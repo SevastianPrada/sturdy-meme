@@ -91,7 +91,7 @@ with st.expander("Derechos y agradecimientos"):
     st.markdown("""-Software desarrollado para la Universidad Francisco de Paula Santander  
 Curso Integrador II - Ingeniería Electrónica  
 Autores: Jaime Arce, Johan Salazar, Angel Hernández, Frank Portillo  
-Asesor: MSc. IE. Darwin O. Cardoso S. | **Coasesora**: MSc. IE. Oriana A. Lopez B.  
+**Asesor**: MSc. IE. Oriana A. Lopez B. | **Coasesor**: MSc. IE. Darwin O. Cardoso S. 
 Año: 2025  
 Versión: 2.1.0 | Última actualización: """ + datetime.now().strftime("%Y-%m-%d") + """  
 """)
