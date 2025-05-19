@@ -18,19 +18,19 @@ import seaborn as sns
 from io import BytesIO
 from datetime import datetime
 
-#imagen de fondo
 st.markdown(
-    """
+    f"""
     <style>
-        [data-testid="stAppViewContainer"] {
-            background-image: url("Fondo1.jpg");
-            background-size: 100% ; /* Ajusta el tamaño según necesites */
+        [data-testid="stAppViewContainer"] {{
+            background-image: url("https://raw.githubusercontent.com/SevastianPrada/sturdy-meme/main/Fondo1.jpg");
+            background-size: cover;
             background-position: center;
-        }
+        }}
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
